@@ -1,11 +1,11 @@
 import axios from "axios";
 const seed = 100;
 
-class bookController {
+class BookController {
     getBook = async (req, res) => {
         try {
             const { limit = 15 } = req.query;
-            const {data: { data : books } } = await axios.get(`https://fakerapi.it/api/V2/books?_quantity=${limit}&_seed=${seed}`);
+            const {data: { data : books } } = await axios.get(`https://fakerapi.it/api/v2/books?_quantity=${limit}&_seed=${seed}`);
 
             res.send(books);
 
@@ -19,7 +19,7 @@ class bookController {
             res.setHeader("Publisher", "JavaScript Developer Class");
 
             const { id } = req.params;
-            const { data: { data: books } } = await axios.get(`https://fakerapi.it/api/V2/books?_quantity=${id}&_seed=${seed}`);
+            const { data: { data: books } } = await axios.get(`https://fakerapi.it/api/v2/books?_quantity=${id}&_seed=${seed}`);
             const bookFound = books.at(-1);
 
             if(!bookFound) throw new Error("Book not found");
@@ -34,4 +34,4 @@ class bookController {
     }
 }
 
-export const bookController = new bookController();
+export const bookController = new BookController();
